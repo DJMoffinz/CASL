@@ -1,5 +1,4 @@
-//cellular automata scripting language
-//uses a python interpreter
+//dungeon floor generation using cellular automata and perlin noise
 //by oskar roebuck, a.k.a. djmoffinz
 
 init: //section of the program that handles setup
