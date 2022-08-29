@@ -1,5 +1,5 @@
 //dungeon floor generation using cellular automata and perlin noise
-//by oskar roebuck, a.k.a. djmoffinz
+//by djmoffinz
 
 init: //section of the program that handles setup
 world.diameter = 100 //sets up the world to be a square with borders of 100x100 cells
