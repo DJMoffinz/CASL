@@ -2,7 +2,7 @@
 //by djmoffinz
 
 init: //section of the program that handles setup
-world.diameter = 100 //sets up the world to be a square with borders of 100x100 cells
+world.diameter = 100 //sets up the world to be a square of 100x100 cells, though i could write a comma and a second value, or generate a dynamically large world intead.
 native.orientation = north //hard to explain but will make sense as you use it
 
 cell: //section of the program that defines cell rules
