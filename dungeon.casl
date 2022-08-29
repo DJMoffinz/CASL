@@ -3,16 +3,17 @@
 //by oskar roebuck, a.k.a. djmoffinz
 
 init: //section of the program that handles setup
-world.diameter == 100 //sets up the world to be a square with borders of 100x100 cells
-native.orientation == north //hard to explain but will make sense as you use it
+world.diameter = 100 //sets up the world to be a square with borders of 100x100 cells
+native.orientation = north //hard to explain but will make sense as you use it
 
 cell: //section of the program that defines cell rules
 #wall //this is a class header. all cell rules after this header and before the next one will be applied to the cell type "wall" 
-cell.rule(1, "corridor"){ //defines a new cell rule called 1 in the group "corridor". these definitions are purely nonscriptual and is only there for the end user to organise his code.
-  neighbor.radius == 2
-  neighbor.orientation == parallel
-  neigbor.max == 1 prefer.rnd == sys.time //find one neighboring cell with all specified characteristics, and if there is more than one, pick one at random
-  cell.set(1) at north(1)
+cell.rule(1, "corridor"){ //defines a new cell rule called 1 in the group "corridor". these definitions are purely nonscriptual and are only there for the end user to organise his code.
+  neighbor.radius == 2 //only looks for neighboring cells that are the second cell away fron the current cell
+  neighbor.orientation == parallel //the neighbor's x or y must be equal to that of the current cell's
+  neighbor.visible == true //the current cell will shoot a ray in the direction of all neighboring cells with specified caracteristics and return only those that the ray reaches unobstructed.
+  neigbor.max == 1 prefer.rnd(sys.time) //find one neighboring cell with all specified characteristics, and if there is more than one, pick one at random
+  cell.prop(1) at north(1) //propogates a single wall cell directly "above" the current cell
 }
 
 draw:
