@@ -1,0 +1,13 @@
+//cellular automata scripting language
+//uses a python interpreter
+//by oskar roebuck, a.k.a. djmoffinz
+
+init: //section of the program that handles setup
+world.radius == 100 //sets up the world to be a square with borders of 100x100 cells
+native.orientation == north //hard to explain but will make sense as you use it
+
+cell: //section of the program that defines cell rules
+#wall //this is a class header. all cell rules after this header and before the next one will be applied to the cell type "wall" 
+cell.rule(1, "corridor"){ //defines a new cell rule called 1 in the group "corridor". these definitions are purely nonscriptual and is only there for the end user to organise his code.
+  neigbor.max == 1 prefer.rnd == clock.sys
+}
