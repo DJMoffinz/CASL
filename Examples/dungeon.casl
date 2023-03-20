@@ -2,17 +2,25 @@
 //by djmoffinz
 
 init: //section of the program that handles setup
-world.diameter = 100 //sets up the world to be a square of 100x100 cells, though i could write a comma and a second value, or generate a dynamically large world intead.
-native.orientation = north //hard to explain but will make sense as you use it
+world.diameter = 100 //sets up the world to be a square of 100x100 cells, though i could write a comma and a second value, or generate a dynamically large world instead.
 
 cell: //section of the program that defines cell rules
 #wall //this is a class header. all cell rules after this header and before the next one will be applied to the cell type "wall" 
+orientation = native //when searching for neighbors or propogating cells, the cursor may be "rotated". this means that placing a cell at "north" of the cursor places it there, then the rotations are applied. setting orientation to absolute means no cursor rotation will take place.
+dynamic randomtime = rnd(sys.time) //defines a dynamic variable, meaning that each time it is referenced, its value is recalculated. useful for random numbers with chaging seeds or values derived from function calls
 cell.rule(1, "corridor"){ //defines a new cell rule called 1 in the group "corridor". these definitions are purely nonscriptual and are only there for the end user to organise his code.
   neighbor.radius == 2 //only looks for neighboring cells that are the second cell away fron the current cell
   neighbor.orientation == parallel //the neighbor's x or y must be equal to that of the current cell's
   neighbor.visible == true //the current cell will shoot a ray in the direction of all neighboring cells with specified caracteristics and return only those that the ray reaches unobstructed.
-  neigbor.max == 1 prefer.rnd(sys.time) //find one neighboring cell with all specified characteristics, and if there is more than one, pick one at random
-  cell.prop(1) at north(1) //propogates a single wall cell directly "above" the current cell
+  neigbor.max == 1 else prefer.randomtime //find one neighboring cell with all specified characteristics, and if there is more than one, pick one at random
+  cell.prop(1) at north(1) //propogates a single wall cell directly "above" (remember orientation = mative!) the current cell. i feel it's necessary to mention that this will only happen if all checks (==) pass. if one fails, everything after is skipped.
+}
+cell.rule(2, "corridor"){ //same deal as the first rule, it's still a rule in the corridor group, but it's called 2
+  neighbor.radius == 2
+  neighbor.orientation == north(1); parallel //moves the cursor for finding neighbors one space "above" the current cell then checks for cells parallel to that position.
+  neighbor.visible == true
+  neighbor.max == 1 else prefer.randomtime
+  cell.prop(2) at north(1)
 }
 
 draw:
