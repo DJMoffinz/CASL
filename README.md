@@ -8,4 +8,5 @@ CASL aims to be:
 - Easy to use
 - Versatile
 - Performant
+
 When I originally had the idea for CASL I knew much less about computers and programming than I do now. From memory, the partial examples found in the [`Examples`](Examples) folder were based on Lua and BASIC, however CASL's design will probably draw much more from C and Haskell going forward.
